@@ -20,7 +20,6 @@ You need to change the Framework Search Path for iosAppUiTest to the path where 
 The iOS project compiles a Kotlin module to a framework (see [iosApp](iosApp/)). 
 
 
-
 ## 📜 License
 
 -------
