@@ -5,10 +5,8 @@ package android
 import android.content.Intent
 import androidx.test.espresso.intent.rule.IntentsTestRule
 import com.schibsted.spain.barista.assertion.BaristaVisibilityAssertions
-import com.schibsted.spain.barista.interaction.BaristaClickInteractions
 import de.jensklingenberg.basickmm.androidApp.MainActivity
-import de.jensklingenberg.basickmm.shared.test.OverviewTest
-import de.jensklingenberg.basickmm.shared.test.TestEnvironment
+import de.jensklingenberg.basickmm.shared.test.*
 import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
@@ -25,11 +23,33 @@ class ExampleInstrumentedTest   {
 
     @Test
     fun whenUserClicksOnListItem_OpenDetailPage()  {
-        OverviewTest(AndroidTestEnv()).whenScreenOpensShowKickAssTitle()
+        OverviewTest(AndroidTestEnv(),AndroidAsserter(),AndroidPageFactory()).whenScreenOpensShowKickAssTitle()
     }
 
 }
 
+class AndroidPageFactory : PageFactory{
+    override fun <T> createPage(pages: Pages): T {
+        TODO("Not yet implemented")
+    }
+
+}
+
+
+class AndroidAsserter : Asserter{
+    override fun assertTrue(assert: Boolean) {
+        Assert.assertTrue(assert)
+    }
+
+    override fun assertEquals(expected: String, actual: String) {
+        Assert.assertEquals(expected, actual)
+    }
+
+    override fun assertNodeDisplayed(text: String) {
+        BaristaVisibilityAssertions.assertDisplayed(text)
+    }
+
+}
 class AndroidTestEnv: TestEnvironment{
     @Rule
     @JvmField
@@ -40,20 +60,10 @@ class AndroidTestEnv: TestEnvironment{
         rule.launchActivity(Intent())
     }
 
-    override fun assertTrue(assert: Boolean) {
-        Assert.assertTrue(assert)
+    override fun mockMovies() {
+        TODO("Not yet implemented")
     }
 
-    override fun assertEquals(expected: String, actual: String) {
-        Assert.assertEquals(expected, actual)
-    }
 
-    override fun clickOnNodeWithText(text: String) {
-        BaristaClickInteractions.clickOn(text)
-    }
-
-    override fun assertNodeDisplayed(text: String) {
-        BaristaVisibilityAssertions.assertDisplayed(text)
-    }
 }
 
