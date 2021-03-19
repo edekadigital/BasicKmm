@@ -31,7 +31,7 @@ class MainFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity)
             adapter = ListAdapter(Greeting().getnicCageMovies())
         }
-        requireActivity().findViewById<TextView>(R.id.platform).setText( Greeting().greeting())
+        requireActivity().findViewById<TextView>(R.id.platform).text = Greeting().greeting()
     }
 
     companion object {

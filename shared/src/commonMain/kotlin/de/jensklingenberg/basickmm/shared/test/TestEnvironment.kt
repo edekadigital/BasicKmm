@@ -1,6 +1,5 @@
 package de.jensklingenberg.basickmm.shared.test
 
-import de.jensklingenberg.basickmm.shared.Testgedöns
 
 
 class MockUser()
@@ -92,7 +91,6 @@ class Detailtest(val page: MovieDetailPage) {
 
     fun testDetais(){
 
-        Testgedöns.getTestEnvironment()
         val benefits = object : BemefitsPage{
             override fun launch(deeplink: String?) {
                 TODO("Not yet implemented")
