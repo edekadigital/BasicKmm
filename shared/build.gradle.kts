@@ -1,6 +1,7 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
-val KTOR_VERSION = "1.5.2"
+val ktorVersion = "1.5.2"
+val coroutineVersion = "1.4.2"
 
 plugins {
     kotlin("multiplatform")
@@ -19,10 +20,10 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-core:$KTOR_VERSION")
-                implementation("io.ktor:ktor-client-gson:$KTOR_VERSION")
-                implementation("io.ktor:ktor-client-json:$KTOR_VERSION")
-                implementation("io.ktor:ktor-client-cio:$KTOR_VERSION")
+                implementation("io.ktor:ktor-client-core:$ktorVersion")
+//                implementation("io.ktor:ktor-client-gson:$KTOR_VERSION")
+//                implementation("io.ktor:ktor-client-json:$KTOR_VERSION")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion")
             }
         }
         val commonTest by getting {
@@ -35,6 +36,8 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation("com.google.android.material:material:1.2.1")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion")
+                implementation("io.ktor:ktor-client-android:$ktorVersion")
 //                implementation("io.ktor:ktor-client-core-jvm:$KTOR_VERSION")
 //                implementation("io.ktor:ktor-client-json-jvm:$KTOR_VERSION")
             }
@@ -45,7 +48,11 @@ kotlin {
                 implementation("junit:junit:4.13")
             }
         }
-        val iosMain by getting
+        val iosMain by getting {
+            dependencies {
+                implementation("io.ktor:ktor-client-ios:$ktorVersion")
+            }
+        }
         val iosTest by getting
     }
 }

@@ -1,9 +1,11 @@
 package edeka.digital.app.data.offers
 
-class OfferRepository(val client: HttpClient = HttpClient(CIO)) : OfferDataSource {
+import io.ktor.client.*
+
+class OfferRepository(val client: HttpClient = HttpClient()) : OfferDataSource {
 
     override suspend fun getOffers(gln: String, size: Int, page: Int): MobileOffersDto {
-
+        TODO("Not yet implemented")
     }
 
     /**
@@ -11,7 +13,7 @@ class OfferRepository(val client: HttpClient = HttpClient(CIO)) : OfferDataSourc
      * @param offerId of the offer
      */
     override suspend fun getOfferById(offerId: Int): OfferMobileDto {
-
+        TODO("Not yet implemented")
     }
 
 
