@@ -1,5 +1,7 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
+val KTOR_VERSION = "1.5.2"
+
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
@@ -15,16 +17,26 @@ kotlin {
         }
     }
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                implementation("io.ktor:ktor-client-core:$KTOR_VERSION")
+                implementation("io.ktor:ktor-client-gson:$KTOR_VERSION")
+                implementation("io.ktor:ktor-client-json:$KTOR_VERSION")
+                implementation("io.ktor:ktor-client-cio:$KTOR_VERSION")
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
+//                implementation("io.ktor:ktor-client-mock:$KTOR_VERSION")
             }
         }
         val androidMain by getting {
             dependencies {
                 implementation("com.google.android.material:material:1.2.1")
+//                implementation("io.ktor:ktor-client-core-jvm:$KTOR_VERSION")
+//                implementation("io.ktor:ktor-client-json-jvm:$KTOR_VERSION")
             }
         }
         val androidTest by getting {
@@ -52,7 +64,8 @@ val packForXcode by tasks.creating(Sync::class) {
     val mode = System.getenv("CONFIGURATION") ?: "DEBUG"
     val sdkName = System.getenv("SDK_NAME") ?: "iphonesimulator"
     val targetName = "ios" + if (sdkName.startsWith("iphoneos")) "Arm64" else "X64"
-    val framework = kotlin.targets.getByName<KotlinNativeTarget>(targetName).binaries.getFramework(mode)
+    val framework =
+        kotlin.targets.getByName<KotlinNativeTarget>(targetName).binaries.getFramework(mode)
     inputs.property("mode", mode)
     dependsOn(framework.linkTask)
     val targetDir = File(buildDir, "xcode-frameworks")

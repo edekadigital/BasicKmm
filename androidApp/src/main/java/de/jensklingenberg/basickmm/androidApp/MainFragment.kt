@@ -29,7 +29,7 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         requireActivity().findViewById<RecyclerView>(R.id.recycler).apply {
             layoutManager = LinearLayoutManager(activity)
-            adapter = ListAdapter(Greeting().getnicCageMovies())
+            adapter = ListAdapter(Greketing().getnicCageMovies())
         }
         requireActivity().findViewById<TextView>(R.id.platform).text = Greeting().greeting()
     }
